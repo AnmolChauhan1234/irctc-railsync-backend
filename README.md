@@ -1,0 +1,1 @@
+“Uses mysql-connector-python to ensure compatibility in restricted environments.”
