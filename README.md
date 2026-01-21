@@ -9,9 +9,6 @@
 
 
 
-
-
-
 ## Databases Setup
 
 This project uses **two databases**:
@@ -324,6 +321,109 @@ Production-style API design
 Easily extendable architecture
 
 This project is designed to mimic a real-world backend service and follows best practices for scalable API development.
+
+
+
+
+
+
+
+## 📦 Prerequisites
+
+Before running this project, ensure the following are installed on your system:
+
+- Python 3.10+
+- MySQL Server (8.x recommended)
+- MongoDB Community Server (6.x recommended)
+
+This project uses:
+- **MySQL** for core relational data (users, bookings, trains, etc.)
+- **MongoDB** for logs and analytics
+
+Both database servers must be installed and running locally.
+
+Download:
+- MySQL: https://dev.mysql.com/downloads/
+- MongoDB: https://www.mongodb.com/try/download/community
+
+---
+
+## ⚙️ Database Setup
+
+After installing MySQL and MongoDB, start the services based on your OS.
+
+### 🐧 Linux (Ubuntu/Debian)
+
+```bash
+# Start MongoDB
+sudo systemctl start mongod
+sudo systemctl enable mongod
+mongosh
+
+# Start MySQL
+sudo systemctl start mysql
+sudo systemctl enable mysql
+mysql -u root -p
+Verify:
+
+bash
+Copy code
+sudo systemctl status mongod
+sudo systemctl status mysql
+🪟 Windows
+powershell
+Copy code
+# MongoDB
+net start MongoDB
+mongosh
+
+# MySQL
+net start MySQL
+mysql -u root -p
+Verify:
+
+powershell
+Copy code
+sc query MongoDB
+sc query MySQL
+🍎 macOS (Homebrew)
+bash
+Copy code
+# MongoDB
+brew services start mongodb-community
+mongosh
+
+# MySQL
+brew services start mysql
+mysql -u root -p
+Verify:
+
+bash
+Copy code
+brew services list | grep mongodb
+brew services list | grep mysql
+🔐 Environment Configuration
+Create a .env file in the project root:
+
+env
+Copy code
+SECRET_KEY=your_secret_key
+DEBUG=True
+
+MYSQL_DB=irctc
+MYSQL_USER=your_mysql_user
+MYSQL_PASSWORD=your_mysql_password
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB=irctc_logs
+Make sure both MySQL and MongoDB are running before starting the backend.
+
+Copy code
+
+
+
 
 
 
