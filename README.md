@@ -11,7 +11,7 @@ https://github.com/AnmolChauhan1234/irctc-railsync-backend
 
 ------------------------------------------------------------------------
 
-## ✨ Features
+## Features
 
 -   User registration & login using JWT
 -   Role-based access (USER / ADMIN)
@@ -41,7 +41,7 @@ https://github.com/AnmolChauhan1234/irctc-railsync-backend
 
 ------------------------------------------------------------------------
 
-## 🧭 System Overview
+## System Overview
 
     Client (Postman / Frontend)
             |
@@ -61,7 +61,7 @@ https://github.com/AnmolChauhan1234/irctc-railsync-backend
 
 ------------------------------------------------------------------------
 
-## 📦 What's Included in This Repository
+## What's Included in This Repository
 
 -   `requirements.txt` → All Python dependencies\
 -   `.env.example` → Sample environment configuration\
@@ -74,7 +74,131 @@ manual setup.
 
 ------------------------------------------------------------------------
 
-## 🚀 Clone & Run the Project
+## Prerequisites
+
+- Python 3.12+
+- MySQL Server (8.x recommended)
+- MongoDB Community Server (6.x recommended)
+
+------------------------------------------------------------------------
+
+## Databases Setup
+
+This project uses **two databases**:
+
+-   **MySQL** → Main transactional data (users, trains, bookings)
+-   **MongoDB** → API logs & analytics (search history, execution time,
+    etc.)
+
+Both are expected to run **locally**.
+
+------------------------------------------------------------------------
+
+### MySQL Setup
+
+Ensure MySQL is running:
+
+-   **Linux**
+
+``` bash
+sudo systemctl start mysql
+```
+
+-   **macOS (Homebrew)**
+
+``` bash
+brew services start mysql
+```
+
+```-   **Windows** Start MySQL Server from *Services* or *MySQL Installer*.```
+
+Create database:
+
+``` sql
+CREATE DATABASE irctc;
+```
+
+(Optional) Create user:
+
+``` sql
+CREATE USER 'irctc_user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON irctc.* TO 'irctc_user'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+Update `.env`:
+
+``` env
+MYSQL_DB=irctc
+MYSQL_USER=irctc_user
+MYSQL_PASSWORD=password
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+```
+
+------------------------------------------------------------------------
+
+### MongoDB Setup (Logs & Analytics)
+
+MongoDB is used only for logging and analytics.
+
+It stores:
+
+-   Endpoint name\
+-   Query parameters\
+-   User ID\
+-   Execution time\
+-   Timestamp
+
+These logs power analytics like:
+
+    GET /api/analytics/top-routes/
+
+Start MongoDB:
+
+-   **Linux**
+
+``` bash
+sudo systemctl start mongod
+```
+
+-   **macOS (Homebrew)**
+
+``` bash
+brew services start mongodb-community
+```
+
+```-   **Windows** Start MongoDB Server from *Services*.```
+
+MongoDB runs at:
+
+    mongodb://localhost:27017
+
+Set in `.env`:
+
+``` env
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB=irctc_logs
+```
+
+You do **not** need to manually create the database.\
+It is created automatically on first write.
+
+Verify:
+
+``` bash
+mongosh
+```
+
+``` js
+use irctc_logs
+show collections
+```
+
+------------------------------------------------------------------------
+
+
+## Clone & Run the Project
 
 ``` bash
 git clone https://github.com/AnmolChauhan1234/irctc-railsync-backend.git
@@ -124,180 +248,95 @@ Server runs at:
 
 ------------------------------------------------------------------------
 
-## ⚙️ Databases Setup
+## 🧪 API Testing (Postman)
 
-This project uses **two databases**:
+A complete Postman collection is included in the root of this repository:
 
--   **MySQL** → Main transactional data (users, trains, bookings)
--   **MongoDB** → API logs & analytics (search history, execution time,
-    etc.)
-
-Both are expected to run **locally**.
-
-------------------------------------------------------------------------
-
-### 🐬 MySQL Setup
-
-Ensure MySQL is running:
-
--   **Linux**
-
-``` bash
-sudo systemctl start mysql
+```
+IRCTC Mini Backend API.postman_collection.json
 ```
 
--   **macOS (Homebrew)**
+Import this file into Postman to test the entire system without any manual setup.
 
-``` bash
-brew services start mysql
+The collection demonstrates the full lifecycle:
+
+```
+Register → Login → Create Train (Admin) → Search → Book → My Bookings → Analytics
 ```
 
--   **Windows** Start MySQL Server from *Services* or *MySQL Installer*.
+It contains ready-made requests for:
 
-Create database:
+- **Auth**
+  - `POST /api/auth/register/`
+  - `POST /api/auth/login/`
 
-``` sql
-CREATE DATABASE irctc;
-```
+- **Trains**
+  - `POST /api/trains/` *(Admin only)*
+  - `GET /api/trains/search/?source=&destination=&limit=&offset=`
 
-(Optional) Create user:
+- **Bookings**
+  - `POST /api/bookings/`
+  - `GET /api/bookings/my/`
 
-``` sql
-CREATE USER 'irctc_user'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON irctc.* TO 'irctc_user'@'localhost';
-FLUSH PRIVILEGES;
-```
+- **Analytics**
+  - `GET /api/analytics/top-routes/`
 
-Update `.env`:
+After login, copy the `access` token and use it as a **Bearer Token** for all protected APIs.
 
-``` env
-MYSQL_DB=irctc
-MYSQL_USER=irctc_user
-MYSQL_PASSWORD=password
-MYSQL_HOST=localhost
-MYSQL_PORT=3306
-```
-
-------------------------------------------------------------------------
-
-### 🍃 MongoDB Setup (Logs & Analytics)
-
-MongoDB is used only for logging and analytics.
-
-It stores:
-
--   Endpoint name\
--   Query parameters\
--   User ID\
--   Execution time\
--   Timestamp
-
-These logs power analytics like:
-
-    GET /api/analytics/top-routes/
-
-Start MongoDB:
-
--   **Linux**
-
-``` bash
-sudo systemctl start mongod
-```
-
--   **macOS (Homebrew)**
-
-``` bash
-brew services start mongodb-community
-```
-
--   **Windows** Start MongoDB Server from *Services*.
-
-MongoDB runs at:
-
-    mongodb://localhost:27017
-
-Set in `.env`:
-
-``` env
-MONGO_URI=mongodb://localhost:27017
-MONGO_DB=irctc_logs
-```
-
-You do **not** need to manually create the database.\
-It is created automatically on first write.
-
-Verify:
-
-``` bash
-mongosh
-```
-
-``` js
-use irctc_logs
-show collections
-```
+For accurate request bodies, headers, and example flows, always refer to the Postman collection included in the root directory.
 
 ------------------------------------------------------------------------
 
 ## 🔗 API Endpoints
 
 ### Authentication
-
--   `POST /api/register/`
--   `POST /api/login/`
+- `POST /api/register/`
+- `POST /api/login/`
 
 All other APIs require:
 
-    Authorization: Bearer <access_token>
-
-------------------------------------------------------------------------
+```
+Authorization: Bearer <access_token>
+```
 
 ### Trains
-
--   `POST /api/trains/` *(Admin only)*\
--   `GET /api/trains/search/?source=&destination=&limit=&offset=`
-
-------------------------------------------------------------------------
+- `POST /api/trains/` *(Admin only)*  
+- `GET /api/trains/search/?source=&destination=&limit=&offset=`
 
 ### Booking
-
--   `POST /api/bookings/`\
--   `GET /api/bookings/my/`
+- `POST /api/bookings/`  
+- `GET /api/bookings/my/`
 
 Uses:
 
--   `transaction.atomic()`
--   `select_for_update()`
+- `transaction.atomic()`
+- `select_for_update()`
 
 to prevent overbooking.
 
-------------------------------------------------------------------------
-
 ### Analytics
-
--   `GET /api/analytics/top-routes/`
+- `GET /api/analytics/top-routes/`
 
 Example:
 
-``` json
+```json
 [
   { "source": "DEL", "destination": "BOM", "count": 120 },
   { "source": "DEL", "destination": "BLR", "count": 98 }
 ]
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 🧩 Design Highlights
 
--   Stateless authentication using JWT\
--   Clean separation of responsibilities\
--   Transaction-safe booking logic\
--   Pagination for scalable search\
--   Production-style API design\
--   Easily extendable architecture
+- Stateless authentication using JWT  
+- Clean separation of responsibilities  
+- Transaction-safe booking logic  
+- Pagination for scalable search  
+- Production-style API design  
+- Easily extendable architecture  
 
-------------------------------------------------------------------------
+---
 
-This project is designed to mimic a real-world backend service and
-follows best practices for scalable API development.
+This project is designed to mimic a real-world backend service and follows best practices for scalable API development.
