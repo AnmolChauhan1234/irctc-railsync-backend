@@ -110,7 +110,10 @@ sudo systemctl start mysql
 brew services start mysql
 ```
 
-```-   **Windows** Start MySQL Server from *Services* or *MySQL Installer*.```
+-   **Windows** 
+``` bash
+Start MySQL Server from *Services* or *MySQL Installer*.
+```
 
 Create database:
 
@@ -168,7 +171,10 @@ sudo systemctl start mongod
 brew services start mongodb-community
 ```
 
-```-   **Windows** Start MongoDB Server from *Services*.```
+-   **Windows** 
+``` bash
+Start MongoDB Server from *Services*.
+```
 
 MongoDB runs at:
 
@@ -218,8 +224,8 @@ SECRET_KEY=your_secret_key
 DEBUG=True
 
 MYSQL_DB=irctc
-MYSQL_USER=your_mysql_user
-MYSQL_PASSWORD=your_mysql_password
+MYSQL_USER=irctc_user
+MYSQL_PASSWORD=password
 MYSQL_HOST=localhost
 MYSQL_PORT=3306
 
@@ -248,7 +254,7 @@ Server runs at:
 
 ------------------------------------------------------------------------
 
-## 🧪 API Testing (Postman)
+## API Testing (Postman)
 
 A complete Postman collection is included in the root of this repository:
 
@@ -287,7 +293,7 @@ For accurate request bodies, headers, and example flows, always refer to the Pos
 
 ------------------------------------------------------------------------
 
-## 🔗 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /api/register/`
@@ -328,7 +334,7 @@ Example:
 
 ---
 
-## 🧩 Design Highlights
+## Design Highlights
 
 - Stateless authentication using JWT  
 - Clean separation of responsibilities  
