@@ -112,7 +112,7 @@ brew services start mysql
 
 -   **Windows** 
 ``` bash
-Start MySQL Server from *Services* or *MySQL Installer*.
+Start MySQL Server from Services or MySQL Installer.
 ```
 
 Create database:
@@ -173,7 +173,7 @@ brew services start mongodb-community
 
 -   **Windows** 
 ``` bash
-Start MongoDB Server from *Services*.
+Start MongoDB Server from Services.
 ```
 
 MongoDB runs at:
