@@ -1,235 +1,307 @@
 {
-  "info": {
-    "_postman_id": "ebd59d7e-b37d-4cf5-99f6-ff2e1a868669",
-    "name": "IRCTC Mini Backend API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "39267483"
-  },
-  "item": [
-    {
-      "name": "Auth",
-      "item": [
-        {
-          "name": "Register",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"123456\",\n  \"first_name\": \"User One\"\n}\n",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://127.0.0.1:8000/api/auth/register/",
-              "protocol": "http",
-              "host": [
-                "127",
-                "0",
-                "0",
-                "1"
-              ],
-              "port": "8000",
-              "path": [
-                "api",
-                "auth",
-                "register",
-                ""
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Login",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"123456\"\n}\n",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://127.0.0.1:8000/api/auth/login/",
-              "protocol": "http",
-              "host": [
-                "127",
-                "0",
-                "0",
-                "1"
-              ],
-              "port": "8000",
-              "path": [
-                "api",
-                "auth",
-                "login",
-                ""
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Trains",
-      "item": [
-        {
-          "name": "Create / Update Train (Admin only)",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MDMwOTQ3LCJpYXQiOjE3NjkwMjczNDcsImp0aSI6ImM4N2M0MjY3MzQxYzQxNmQ5ZTRhYzVhZmU0NzI3MWFlIiwidXNlcl9pZCI6IjMifQ.PD5rDlsmpik1UWHbTGRDrpYDEVwBBL30-itwuW93rp0",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"train_number\": \"12345\",\n  \"name\": \"Rajdhani Express\",\n  \"source\": \"DEL\",\n  \"destination\": \"BOM\",\n  \"departure_time\": \"2026-02-10T10:00:00Z\",\n  \"arrival_time\": \"2026-02-10T18:00:00Z\",\n  \"total_seats\": 100,\n  \"available_seats\": 100\n}\n",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://127.0.0.1:8000/api/trains/",
-              "protocol": "http",
-              "host": [
-                "127",
-                "0",
-                "0",
-                "1"
-              ],
-              "port": "8000",
-              "path": [
-                "api",
-                "trains",
-                ""
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Search Trains",
-          "request": {
-            "method": "GET",
-            "header": []
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Bookings",
-      "item": [
-        {
-          "name": "Book Seats",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MDMxNjUzLCJpYXQiOjE3NjkwMjgwNTMsImp0aSI6IjdkYjI4YjgzYTU2MzRlOGJhMDFmNTcxMzEwN2RhYzVhIiwidXNlcl9pZCI6IjIifQ.BGlAD53oS5-J1i1fowmxcYp4f2C93__8iwNl7tagbwQ",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"train_id\": 1,\n  \"seats\": 2\n}\n",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://127.0.0.1:8000/api/bookings/",
-              "protocol": "http",
-              "host": [
-                "127",
-                "0",
-                "0",
-                "1"
-              ],
-              "port": "8000",
-              "path": [
-                "api",
-                "bookings",
-                ""
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "My Bookings",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MDMxNjUzLCJpYXQiOjE3NjkwMjgwNTMsImp0aSI6IjdkYjI4YjgzYTU2MzRlOGJhMDFmNTcxMzEwN2RhYzVhIiwidXNlcl9pZCI6IjIifQ.BGlAD53oS5-J1i1fowmxcYp4f2C93__8iwNl7tagbwQ",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:8000/api/bookings/my/",
-              "protocol": "http",
-              "host": [
-                "127",
-                "0",
-                "0",
-                "1"
-              ],
-              "port": "8000",
-              "path": [
-                "api",
-                "bookings",
-                "my",
-                ""
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Analytics",
-      "item": [
-        {
-          "name": "Top Routes",
-          "request": {
-            "method": "GET",
-            "header": []
-          },
-          "response": []
-        }
-      ]
-    }
-  ]
+	"info": {
+		"_postman_id": "ebd59d7e-b37d-4cf5-99f6-ff2e1a868669",
+		"name": "IRCTC Mini Backend API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39267483"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"123456\",\n  \"first_name\": \"User One\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/register/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"123456\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trains",
+			"item": [
+				{
+					"name": "Create / Update Train (Admin only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MDMwOTQ3LCJpYXQiOjE3NjkwMjczNDcsImp0aSI6ImM4N2M0MjY3MzQxYzQxNmQ5ZTRhYzVhZmU0NzI3MWFlIiwidXNlcl9pZCI6IjMifQ.PD5rDlsmpik1UWHbTGRDrpYDEVwBBL30-itwuW93rp0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"train_number\": \"12345\",\n  \"name\": \"Rajdhani Express\",\n  \"source\": \"DEL\",\n  \"destination\": \"BOM\",\n  \"departure_time\": \"2026-02-10T10:00:00Z\",\n  \"arrival_time\": \"2026-02-10T18:00:00Z\",\n  \"total_seats\": 100,\n  \"available_seats\": 100\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/trains/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"trains",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Trains",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MTgwMDQ2LCJpYXQiOjE3NjkxNzY0NDYsImp0aSI6IjcwZGFhNWMyMzlmMjQ2MjFhYmJlMDBhNjUyNGQ2NmQ2IiwidXNlcl9pZCI6IjIifQ.ufohDDPrLXpKm6TzLje1t6CvMRkSmvLomZct5ucEmN0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/trains/search/?source=DEL&destination=BOM&limit=10&offset=0",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"trains",
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "source",
+									"value": "DEL"
+								},
+								{
+									"key": "destination",
+									"value": "BOM"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Book Seats",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MDMxNjUzLCJpYXQiOjE3NjkwMjgwNTMsImp0aSI6IjdkYjI4YjgzYTU2MzRlOGJhMDFmNTcxMzEwN2RhYzVhIiwidXNlcl9pZCI6IjIifQ.BGlAD53oS5-J1i1fowmxcYp4f2C93__8iwNl7tagbwQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"train_id\": 1,\n  \"seats\": 2\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/bookings/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"bookings",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "My Bookings",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MDMxNjUzLCJpYXQiOjE3NjkwMjgwNTMsImp0aSI6IjdkYjI4YjgzYTU2MzRlOGJhMDFmNTcxMzEwN2RhYzVhIiwidXNlcl9pZCI6IjIifQ.BGlAD53oS5-J1i1fowmxcYp4f2C93__8iwNl7tagbwQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/bookings/my/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"bookings",
+								"my",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics",
+			"item": [
+				{
+					"name": "Top Routes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY5MTgwMDQ2LCJpYXQiOjE3NjkxNzY0NDYsImp0aSI6IjcwZGFhNWMyMzlmMjQ2MjFhYmJlMDBhNjUyNGQ2NmQ2IiwidXNlcl9pZCI6IjIifQ.ufohDDPrLXpKm6TzLje1t6CvMRkSmvLomZct5ucEmN0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/analytics/top-routes/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"analytics",
+								"top-routes",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }
